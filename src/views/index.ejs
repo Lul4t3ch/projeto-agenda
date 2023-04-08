@@ -6,24 +6,33 @@
         <div class="col-lg-2"></div>
         <div class="col-lg-8 my-5">
           <h1 class="text-center">Agenda</h1>
+          <% if(contatos.length > 0) { %>
           <p class="text-center lead">Seus contatos estão abaixo: </p>
+          <% }%>
 
           <%- include('includes/messages'); %>
 
-          <div class="responsive-table">
-            <table class="table my-3">
-              <tr>
-                <td>Luis </td>
-                <td>Henrique </td>
-                <td>784555598565</td>
-                <td>luissantosmatos15@gmail.com</td>
-              </tr>
-            </table>
-          </div>
+          <% if(contatos.length > 0) { %>
+            <div class="responsive-table">
+              <table class="table my-3">
+  
+                <% contatos.forEach(contato => { %>
+                  <tr>
+                    <td><%= contato.nome%> </td>
+                    <td><%= contato.sobrenome%> </td>
+                    <td><%= contato.email%></td>
+                    <td><%= contato.telefone%></td>
+                    <td> <a href="/contato/<%= contato._id%>">Editar</a></td>
+                    <td> <a  class="text-danger" href="/contato/delete/<%= contato._id%>">Excluir</a></td>                </tr>
+                  
+                <% }); %>
+              </table>
+            </div>
+            <% }  else {%>
+              <p class="text-center lead">A sua lista de contatos está vazia</p>
+            <% } %>
 
-        </div>
-        <div class="col-lg-2"></div>
-      </div>  
+        </div> 
     </div>
 
 <%- include('includes/footer')%>

@@ -4,7 +4,9 @@ const app = express();
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', true);
 
-mongoose.connect(process.env.CONNECTIONSTRING, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.CONNECTIONSTRING, 
+    {useNewUrlParser: true,
+     useUnifiedTopology: true})
     .then(() => {
         app.emit('pronto');
     }).catch(e => console.log(e));
@@ -22,6 +24,8 @@ const { middlewareGlobal, checkCsrf, csrfMiddleware } = require('./src/middlewar
 
 
 app.use(helmet());
+app.use(helmet.referrerPolicy({policy: ["origin", "unsafe-url"]}));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
