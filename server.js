@@ -18,13 +18,13 @@ const flash = require('connect-flash');
 
 const routes = require('./routes');
 const path = require('path');
-const helmet = require('helmet');
+// const helmet = require('helmet');
 const csrf = require('csurf');
 const { middlewareGlobal, checkCsrf, csrfMiddleware } = require('./src/middlewares/middleware');
 
 
-app.use(helmet());
-app.use(helmet.referrerPolicy({policy: ["origin", "unsafe-url"]}));
+// app.use(helmet());
+// app.use(helmet.referrerPolicy({policy: ["origin", "unsafe-url"]}));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
